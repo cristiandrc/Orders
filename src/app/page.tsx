@@ -12,7 +12,6 @@ interface Props {
 
 export default async function Home({ searchParams }: Props) {
   const { dateStart, dateEnd, filterCedi } = searchParams
-  console.log(dateStart, dateEnd)
   const rts = await getSales(dateStart, dateEnd, filterCedi)
   return (
     <main>

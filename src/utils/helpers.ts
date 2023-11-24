@@ -28,7 +28,6 @@ export const fetching = async <T>(
 export const getPrice = (list: ListType[], d: string) => {
   const rts = list.reduce(
     (a, c) => {
-      console.log(c.creationDate)
       const value = parseInt(`${c.totalValue}`.slice(0, -2))
       const totalPrice = (a.totalPrice += value)
       return { totalPrice, totalOrders: a.totalOrders + 1 }
@@ -38,11 +37,11 @@ export const getPrice = (list: ListType[], d: string) => {
   return rts
 }
 
-export const getCurrentDate = (end: boolean) => {
-  if (end) {
-    return '2023-11-24'
-  }
+export const getCurrentDate = (end = false) => {
   const currentDate = new Date()
+  if (end) {
+    currentDate.setDate(currentDate.getDate() + 1)
+  }
   currentDate.setHours(currentDate.getHours() - 5)
 
   const year = currentDate.getFullYear()

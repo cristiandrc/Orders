@@ -1,11 +1,10 @@
 import { settings } from '@/utils/config'
-import { fetching, getPrice } from './helpers'
+import { fetching, getCurrentDate, getPrice } from './helpers'
 export interface ListType {
   orderId: number
   clientName: string
   totalValue: number
   status: string
-  creationDate: string
 }
 interface responseType {
   list: ListType[]
@@ -31,11 +30,11 @@ export const getOrders = async (data: getOrdersType) => {
   let totalSelling = { totalPrice: 0, totalOrders: 0 }
   const start =
     data.startDate === undefined || data.startDate === ''
-      ? '2023-11-24'
+      ? getCurrentDate()
       : data.startDate
   const end =
     data.endDate === undefined || data.endDate === ''
-      ? '2023-11-25'
+      ? getCurrentDate(true)
       : data.endDate
   const queryCedi =
     data.filterCedi === 'true' ? `&f_sellerNames=${data.cedi}` : ''
