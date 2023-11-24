@@ -4,14 +4,16 @@ import { getSales } from '@/utils/fetch'
 interface SearchParams {
   dateStart?: string
   dateEnd?: string
+  filterCedi?: string
 }
 interface Props {
   searchParams: SearchParams
 }
 
 export default async function Home({ searchParams }: Props) {
-  const { dateStart, dateEnd } = searchParams
-  const rts = await getSales(dateStart, dateEnd)
+  const { dateStart, dateEnd, filterCedi } = searchParams
+  console.log(dateStart, dateEnd)
+  const rts = await getSales(dateStart, dateEnd, filterCedi)
   return (
     <main>
       <section>

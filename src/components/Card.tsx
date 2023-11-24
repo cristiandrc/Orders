@@ -12,11 +12,14 @@ export default async function Card({
 }: Props) {
   return (
     <article>
-      <span>{brand}</span>
+      <span className="card_brand">{brand}</span>
       {totalOrders ? (
         <>
           <div>
-            Orders: {totalOrders} {' | '} Gross Total:{' '}
+            <span className="card_title">Pedidos:</span> {totalOrders}
+          </div>
+          <div>
+            <span className="card_title">Venta Total:</span>
             {totalSelling.toLocaleString('es-CO', {
               style: 'currency',
               currency: 'COP',
@@ -24,7 +27,7 @@ export default async function Card({
             })}
           </div>
           <div>
-            Avg. ticket:
+            <span className="card_title">Avg. ticket:</span>
             {avg.toLocaleString('es-CO', {
               style: 'currency',
               currency: 'COP',

@@ -1,15 +1,14 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 const DateHandle = () => {
-  const router = useRouter()
   const [startDate, setStartDate] = useState<string>('')
   const [endDate, setEndDate] = useState<string>('')
+  const [isCheck, setCheck] = useState<boolean>(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    router.push(`/?dateStart=${startDate}&dateEnd=${endDate}`)
+    window.location.href = `/?dateStart=${startDate}&dateEnd=${endDate}&filterCedi=${isCheck}`
   }
 
   return (
@@ -28,6 +27,10 @@ const DateHandle = () => {
         value={endDate}
         onChange={(e) => setEndDate(e.target.value)}
       />
+      <label>
+        CEDI:
+        <input onClick={(e) => setCheck(!isCheck)} type="checkbox" />
+      </label>
       <button type="submit">Enviar</button>
     </form>
   )
