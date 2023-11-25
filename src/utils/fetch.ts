@@ -32,10 +32,12 @@ export const getOrders = async (data: getOrdersType) => {
     data.startDate === undefined || data.startDate === ''
       ? getCurrentDate()
       : data.startDate
+
   const end =
     data.endDate === undefined || data.endDate === ''
       ? getCurrentDate(true)
       : data.endDate
+
   const queryCedi =
     data.filterCedi === 'true' ? `&f_sellerNames=${data.cedi}` : ''
 
@@ -50,7 +52,7 @@ export const getOrders = async (data: getOrdersType) => {
     totalSelling = getPrice(rts.list, data.brand)
   }
 
-  for (let i = 2; i <= rts.paging.pages; i++) {
+  for (let i = 2; i <= rts.paging.pages && i <= 30; i++) {
     const paginationData = await fetching<responseType>(`${URL}&page=${i}`, KEY)
     if (!paginationData.list) {
       totalSelling = {
